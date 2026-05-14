@@ -15,7 +15,7 @@ public class JwtUtil {
 
     private final Key key;
 
-    public JwtUtil(@Value("${JWT_SECRET:campusready-secret-key-for-jwt-tokens-2024-very-long-secret-key}") String secretKey) {
+    public JwtUtil(@Value("${jwt.secret}") String secretKey) {
         this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
