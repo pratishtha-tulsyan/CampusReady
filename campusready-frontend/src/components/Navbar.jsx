@@ -44,6 +44,12 @@ function Navbar() {
           </NavLink>
           <NavLink
             className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+            to="/resources"
+          >
+            Resources
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
             to="/leaderboard"
           >
             Leaderboard
@@ -55,6 +61,12 @@ function Navbar() {
                 to="/admin/modules"
               >
                 Admin Modules
+              </NavLink>
+              <NavLink
+                className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+                to="/admin/resources"
+              >
+                Admin Resources
               </NavLink>
               <NavLink
                 className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}

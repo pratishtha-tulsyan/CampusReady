@@ -11,6 +11,8 @@ import CertificatePage from './pages/CertificatePage';
 import QuizPage from './pages/QuizPage';
 import AdminQuizPage from './pages/AdminQuizPage';
 import LeaderboardPage from './pages/LeaderboardPage';
+import ResourcesPage from './pages/ResourcesPage';
+import AdminResourcesPage from './pages/AdminResourcesPage';
 import { applyTheme, getSavedTheme } from './services/theme';
 
 function App() {
@@ -29,10 +31,12 @@ function App() {
           <Route path="/progress" element={<ProgressPage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route path="/certificate" element={<CertificatePage />} />
+          <Route path="/resources" element={<ResourcesPage />} />
           <Route element={<AdminRoute />}>
             <Route path="/admin/modules" element={<AdminModulePage />} />
             <Route path="/admin/quizzes" element={<AdminQuizPage />} />
             <Route path="/admin/users" element={<AdminUsersPage />} />
+            <Route path="/admin/resources" element={<AdminResourcesPage />} />
           </Route>
         </Route>
       </Routes>

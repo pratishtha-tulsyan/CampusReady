@@ -121,6 +121,52 @@ export const getAdminUsers = async () => {
   return response.json();
 };
 
+export const getResources = async () => {
+  const response = await authFetch('/resources/');
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch resources');
+  }
+
+  return response.json();
+};
+
+export const createResource = async (resourceData) => {
+  const response = await authFetch('/resources/create', {
+    method: 'POST',
+    body: JSON.stringify(resourceData),
+  });
+
+  if (!response.ok) {
+    throw new Error('Create resource request failed');
+  }
+
+  return response.json();
+};
+
+export const updateResource = async (resourceId, resourceData) => {
+  const response = await authFetch(`/resources/${resourceId}`, {
+    method: 'PUT',
+    body: JSON.stringify(resourceData),
+  });
+
+  if (!response.ok) {
+    throw new Error('Update resource request failed');
+  }
+
+  return response.json();
+};
+
+export const deleteResource = async (resourceId) => {
+  const response = await authFetch(`/resources/${resourceId}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    throw new Error('Delete resource request failed');
+  }
+};
+
 export const createUser = async (userData) => {
   const response = await authFetch('/admin/users', {
     method: 'POST',
