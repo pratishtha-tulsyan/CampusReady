@@ -252,34 +252,42 @@ function AdminModulePage() {
               <div className="modules-grid admin-modules-grid" aria-label="Admin module list">
                 {modules.map((module) => (
                   <article className="module-card admin-card" key={module.id}>
-                    <div className="module-card-header">
-                      <h3>
-                        <span className="module-emoji">{getDisasterEmoji(module.disasterType)}</span>
-                        {module.title}
-                      </h3>
-                      <div className="module-card-actions">
-                        <button
-                          type="button"
-                          className="edit-button"
-                          onClick={() => handleEditModule(module)}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          type="button"
-                          className="delete-button"
-                          onClick={() => handleDeleteModule(module.id)}
-                          disabled={isDeletingId === module.id}
-                        >
-                          {isDeletingId === module.id ? 'Deleting...' : 'Delete'}
-                        </button>
-                      </div>
-                    </div>
-                    <p>{module.description}</p>
-                    <div className="module-card-meta">
-                      <span>{module.disasterType}</span>
-                    </div>
-                  </article>
+  <div className="card-content">
+    <div className="module-card-header">
+      <h3>
+        <span className="module-emoji">
+          {getDisasterEmoji(module.disasterType)}
+        </span>
+        {module.title}
+      </h3>
+    </div>
+
+    <p>{module.description}</p>
+
+    <div className="module-card-meta">
+      <span>{module.disasterType}</span>
+    </div>
+  </div>
+
+  <div className="module-card-actions">
+    <button
+      type="button"
+      className="edit-button"
+      onClick={() => handleEditModule(module)}
+    >
+      Edit
+    </button>
+
+    <button
+      type="button"
+      className="delete-button"
+      onClick={() => handleDeleteModule(module.id)}
+      disabled={isDeletingId === module.id}
+    >
+      {isDeletingId === module.id ? 'Deleting...' : 'Delete'}
+    </button>
+  </div>
+</article>
                 ))}
               </div>
             </section>
