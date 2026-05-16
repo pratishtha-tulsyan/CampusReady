@@ -89,6 +89,19 @@ export const completeModule = async ({ userId, moduleId, completed, completedAt 
   return response.json();
 };
 
+export const updateModule = async (moduleId, moduleData) => {
+  const response = await authFetch(`/modules/${moduleId}`, {
+    method: 'PUT',
+    body: JSON.stringify(moduleData),
+  });
+
+  if (!response.ok) {
+    throw new Error('Update module request failed');
+  }
+
+  return response.json();
+};
+
 export const deleteModule = async (moduleId) => {
   const response = await authFetch(`/modules/${moduleId}`, {
     method: 'DELETE',

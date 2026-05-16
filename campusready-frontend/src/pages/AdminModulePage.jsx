@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Navbar from '../components/Navbar';
-import { createModule, deleteModule, getModules } from '../services/api';
+import { createModule, deleteModule, getModules, updateModule } from '../services/api';
 
 const disasterOptions = [
   { value: '', label: 'Select a disaster type' },
@@ -33,10 +33,13 @@ function AdminModulePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isDeletingId, setIsDeletingId] = useState(null);
+  const [editingModuleId, setEditingModuleId] = useState(null);
   const [formState, setFormState] = useState(initialFormState);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const formRef = useRef(null);
 
+  const isEditing = Boolean(editingModuleId);
   const hasModules = useMemo(() => modules.length > 0, [modules]);
 
   const getDisasterEmoji = (type) => disasterEmojiMap[type] || '🛡️';
@@ -64,6 +67,16 @@ function AdminModulePage() {
     setFormState((current) => ({ ...current, [name]: value }));
   };
 
+  useEffect(() => {
+    if (isEditing && formRef.current) {
+      formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const firstInput = formRef.current.querySelector('input, textarea, select');
+      if (firstInput) {
+        firstInput.focus();
+      }
+    }
+  }, [isEditing]);
+
   const handleCreateModule = async (event) => {
     event.preventDefault();
     setError('');
@@ -71,12 +84,22 @@ function AdminModulePage() {
     setIsSaving(true);
 
     try {
-      const created = await createModule(formState);
-      setModules((current) => [created, ...current]);
+      if (isEditing) {
+        const updated = await updateModule(editingModuleId, formState);
+        setModules((current) => current.map((module) => (module.id === editingModuleId ? updated : module)));
+        setSuccess('Module updated successfully.');
+        setEditingModuleId(null);
+      } else {
+        const created = await createModule(formState);
+        setModules((current) => [created, ...current]);
+        setSuccess('Module created successfully.');
+      }
+
       setFormState(initialFormState);
-      setSuccess('Module created successfully.');
     } catch {
-      setError('Unable to create module. Please check the fields and try again.');
+      setError(isEditing
+        ? 'Unable to update module. Please check the fields and try again.'
+        : 'Unable to create module. Please check the fields and try again.');
     } finally {
       setIsSaving(false);
     }
@@ -91,11 +114,34 @@ function AdminModulePage() {
       await deleteModule(moduleId);
       setModules((current) => current.filter((module) => module.id !== moduleId));
       setSuccess('Module deleted successfully.');
+      if (editingModuleId === moduleId) {
+        setEditingModuleId(null);
+        setFormState(initialFormState);
+      }
     } catch {
       setError('Unable to delete module. Please try again.');
     } finally {
       setIsDeletingId(null);
     }
+  };
+
+  const handleEditModule = (module) => {
+    setError('');
+    setSuccess('');
+    setEditingModuleId(module.id);
+    setFormState({
+      title: module.title,
+      description: module.description,
+      disasterType: module.disasterType,
+      content: module.content,
+    });
+  };
+
+  const handleCancelEdit = () => {
+    setEditingModuleId(null);
+    setFormState(initialFormState);
+    setError('');
+    setSuccess('');
   };
 
   return (
@@ -112,11 +158,13 @@ function AdminModulePage() {
 
         <section className="admin-panel">
           <div className="admin-grid">
-            <form className="admin-form-card" onSubmit={handleCreateModule}>
+            <form className="admin-form-card" onSubmit={handleCreateModule} ref={formRef}>
               <div className="admin-form-header">
-                <h2>Create Module</h2>
+                <h2>{isEditing ? 'Edit Module' : 'Create Module'}</h2>
                 <p className="admin-form-copy">
-                  Add a new training module to keep campus teams ready and informed.
+                  {isEditing
+                    ? 'Update the module details, or cancel to return to module creation.'
+                    : 'Add a new training module to keep campus teams ready and informed.'}
                 </p>
               </div>
 
@@ -174,9 +222,21 @@ function AdminModulePage() {
                 />
               </div>
 
-              <button className="primary-button" type="submit" disabled={isSaving}>
-                {isSaving ? 'Saving module...' : 'Create Module'}
-              </button>
+              <div className="admin-form-actions">
+                <button className="primary-button" type="submit" disabled={isSaving}>
+                  {isSaving ? (isEditing ? 'Updating module...' : 'Saving module...') : (isEditing ? 'Update Module' : 'Create Module')}
+                </button>
+                {isEditing && (
+                  <button
+                    type="button"
+                    className="secondary-button"
+                    onClick={handleCancelEdit}
+                    disabled={isSaving}
+                  >
+                    Cancel Edit
+                  </button>
+                )}
+              </div>
             </form>
 
             <section className="admin-modules-card">
@@ -197,14 +257,23 @@ function AdminModulePage() {
                         <span className="module-emoji">{getDisasterEmoji(module.disasterType)}</span>
                         {module.title}
                       </h3>
-                      <button
-                        type="button"
-                        className="delete-button"
-                        onClick={() => handleDeleteModule(module.id)}
-                        disabled={isDeletingId === module.id}
-                      >
-                        {isDeletingId === module.id ? 'Deleting...' : 'Delete'}
-                      </button>
+                      <div className="module-card-actions">
+                        <button
+                          type="button"
+                          className="edit-button"
+                          onClick={() => handleEditModule(module)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          type="button"
+                          className="delete-button"
+                          onClick={() => handleDeleteModule(module.id)}
+                          disabled={isDeletingId === module.id}
+                        >
+                          {isDeletingId === module.id ? 'Deleting...' : 'Delete'}
+                        </button>
+                      </div>
                     </div>
                     <p>{module.description}</p>
                     <div className="module-card-meta">
