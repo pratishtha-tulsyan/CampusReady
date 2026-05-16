@@ -79,7 +79,8 @@ function ProgressPage() {
     <>
       <Navbar />
       <main className="dashboard-page">
-        <section className="dashboard-header">
+        <div className="page-container">
+          <section className="dashboard-header">
           <div>
             <p className="eyebrow">CampusReady</p>
             <h1>Progress</h1>
@@ -178,6 +179,7 @@ function ProgressPage() {
             </article>
           ))}
         </section>
+        </div>
       </main>
     </>
   );

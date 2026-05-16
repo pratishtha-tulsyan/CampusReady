@@ -194,13 +194,15 @@ svg {
 }
 
 .navbar-inner {
-  max-width: 1220px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 12px 24px;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  min-height: 72px;
+  width: 100%;
 }
 
 .navbar a {
@@ -217,8 +219,24 @@ svg {
 .navbar-links {
   display: flex;
   align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 12px;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.navbar-links::-webkit-scrollbar {
+  height: 6px;
+}
+
+.navbar-links::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.navbar-links::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
 }
 
 .nav-link {
@@ -259,18 +277,27 @@ svg {
 
 .dashboard-page {
   min-height: 100vh;
-  padding: 32px 24px 48px;
+  padding: 24px 0 48px;
   background: var(--bg);
 }
 
+.page-container {
+  width: min(100%, 1280px);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
 .dashboard-header {
-  max-width: 1160px;
-  margin: 0 auto 30px;
-  padding: 32px 32px 34px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto 32px;
+  padding: 36px 32px 38px;
   border-radius: 24px;
   background: linear-gradient(135deg, rgba(15, 42, 82, 0.96), rgba(10, 23, 42, 0.94));
   color: var(--text-inverse);
   box-shadow: 0 28px 68px rgba(4, 21, 45, 0.18);
+  box-sizing: border-box;
 }
 
 .dashboard-header h1 {
@@ -536,18 +563,27 @@ svg {
 }
 
 .modules-toolbar {
-  max-width: 1160px;
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto 28px;
   display: grid;
   gap: 18px;
   grid-template-columns: 1fr auto;
   align-items: end;
+  box-sizing: border-box;
 }
 
 .search-field,
 .filter-field {
   display: grid;
   gap: 10px;
+}
+
+.filter-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+  flex-wrap: wrap;
 }
 
 .search-field label,
@@ -851,7 +887,8 @@ svg {
 }
 
 .dashboard-status {
-  max-width: 1160px;
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto 24px;
   padding: 18px 22px;
   border: 1px solid var(--border-soft);
@@ -881,8 +918,11 @@ svg {
 }
 
 .admin-panel {
-  max-width: 1120px;
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
 .admin-grid {
@@ -1225,6 +1265,8 @@ svg {
 
   .navbar-links {
     width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .nav-link {
@@ -1239,19 +1281,24 @@ svg {
 }
 
 .hero {
-  padding: 64px 24px;
+  width: 100%;
+  padding: 64px 0;
   background-size: cover;
   background-position: center center;
   color: var(--button-text);
+  box-sizing: border-box;
 }
 
 .hero-inner {
-  max-width: 1120px;
+  width: min(100%, 1280px);
+  max-width: 1280px;
   margin: 0 auto;
+  padding: 0 24px;
   display: grid;
   grid-template-columns: 1fr 420px;
   gap: 40px;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .hero-left {
@@ -1342,8 +1389,11 @@ svg {
 }
 
 .leaderboard-container {
-  max-width: 1120px;
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
 .leaderboard-table {

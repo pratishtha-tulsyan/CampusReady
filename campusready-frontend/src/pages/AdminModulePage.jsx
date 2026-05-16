@@ -150,7 +150,8 @@ function AdminModulePage() {
     <>
       <Navbar />
       <main className="dashboard-page">
-        <section className="dashboard-header">
+        <div className="page-container">
+          <section className="dashboard-header">
           <div>
             <p className="eyebrow">CampusReady Admin</p>
             <h1>Module Management</h1>
@@ -303,6 +304,7 @@ function AdminModulePage() {
             </section>
           </div>
         </section>
+        </div>
       </main>
     </>
   );

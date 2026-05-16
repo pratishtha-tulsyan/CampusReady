@@ -29,7 +29,8 @@ function LeaderboardPage() {
     <>
       <Navbar />
       <main className="dashboard-page">
-        <section className="dashboard-header">
+        <div className="page-container">
+          <section className="dashboard-header">
           <div>
             <p className="eyebrow">CampusReady</p>
             <h1>Leaderboard</h1>
@@ -74,6 +75,7 @@ function LeaderboardPage() {
             </div>
           </section>
         )}
+        </div>
       </main>
     </>
   );

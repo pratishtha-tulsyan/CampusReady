@@ -73,7 +73,8 @@ function ResourcesPage() {
     <>
       <Navbar />
       <main className="dashboard-page">
-        <section className="dashboard-header">
+        <div className="page-container">
+          <section className="dashboard-header">
           <div>
             <p className="eyebrow">Emergency Resources Hub</p>
             <h1>Disaster Preparedness & Safety</h1>
@@ -151,6 +152,7 @@ function ResourcesPage() {
             </article>
           ))}
         </section>
+        </div>
       </main>
     </>
   );

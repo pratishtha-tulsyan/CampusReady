@@ -152,7 +152,8 @@ function ModulesPage() {
     <>
       <Navbar />
       <main className="dashboard-page">
-        <section className="dashboard-header">
+        <div className="page-container">
+          <section className="dashboard-header">
           <div>
             <p className="eyebrow">CampusReady</p>
             <h1>Training Modules</h1>
@@ -238,6 +239,7 @@ function ModulesPage() {
             />
           ))}
         </section>
+        </div>
       </main>
     </>
   );

@@ -86,7 +86,8 @@ function CertificatePage() {
     <>
       <Navbar />
       <main className="dashboard-page certificate-page">
-        <section className="dashboard-header">
+        <div className="page-container">
+          <section className="dashboard-header">
           <div>
             <p className="eyebrow">CampusReady</p>
             <h1>Certificate</h1>
@@ -159,6 +160,7 @@ function CertificatePage() {
             </ul>
           </section>
         )}
+        </div>
       </main>
     </>
   );

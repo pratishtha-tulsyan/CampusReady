@@ -174,8 +174,9 @@ function AdminQuizPage() {
   return (
     <div className="admin-quiz-page">
       <Navbar />
-      <div className="admin-quiz-container">
-        <div className="admin-quiz-header">
+      <div className="page-container">
+        <div className="admin-quiz-container">
+          <div className="admin-quiz-header">
           <h1>Quiz Management</h1>
           <p>Create and manage quizzes for training modules</p>
           <button className="btn btn-secondary" onClick={() => navigate('/admin/modules')}>
@@ -427,6 +428,7 @@ function AdminQuizPage() {
         </div>
       </div>
     </div>
+  </div>
   );
 }
 

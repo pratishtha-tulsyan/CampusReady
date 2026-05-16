@@ -150,7 +150,8 @@ function AdminResourcesPage() {
     <>
       <Navbar />
       <main className="dashboard-page">
-        <section className="dashboard-header">
+        <div className="page-container">
+          <section className="dashboard-header">
           <div>
             <p className="eyebrow">CampusReady Admin</p>
             <h1>Resource Management</h1>
@@ -330,6 +331,7 @@ function AdminResourcesPage() {
             </section>
           </div>
         </section>
+        </div>
       </main>
     </>
   );

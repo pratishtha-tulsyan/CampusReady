@@ -114,7 +114,8 @@ function AdminUsersPage() {
     <>
       <Navbar />
       <main className="dashboard-page">
-        <section className="dashboard-header">
+        <div className="page-container">
+          <section className="dashboard-header">
           <div>
             <p className="eyebrow">CampusReady Admin</p>
             <h1>User Management</h1>
@@ -239,6 +240,7 @@ function AdminUsersPage() {
             </div>
           </div>
         </section>
+        </div>
       </main>
     </>
   );
