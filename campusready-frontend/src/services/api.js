@@ -121,3 +121,120 @@ export const getUserProgress = async () => {
   const data = await response.json();
   return Array.isArray(data) ? data : data.progress || [];
 };
+
+// Quiz API functions
+export const getQuizByModule = async (moduleId) => {
+  const response = await authFetch(`/quiz/module/${moduleId}`);
+
+  if (!response.ok) {
+    throw new Error('Quiz not found for module');
+  }
+
+  return response.json();
+};
+
+export const getQuizQuestions = async (quizId) => {
+  const response = await authFetch(`/quiz/${quizId}/questions`);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch quiz questions');
+  }
+
+  return response.json();
+};
+
+export const submitQuiz = async (quizId, answers) => {
+  const response = await authFetch('/quiz/submit', {
+    method: 'POST',
+    body: JSON.stringify({
+      quizId,
+      answers,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to submit quiz');
+  }
+
+  return response.json();
+};
+
+export const checkIfQuizPassed = async (quizId) => {
+  const response = await authFetch(`/quiz/${quizId}/passed`);
+
+  if (!response.ok) {
+    throw new Error('Failed to check quiz status');
+  }
+
+  return response.json();
+};
+
+export const getQuizHistory = async (quizId) => {
+  const response = await authFetch(`/quiz/${quizId}/history`);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch quiz history');
+  }
+
+  return response.json();
+};
+
+// Admin quiz functions
+export const createQuiz = async (quizData) => {
+  const response = await authFetch('/quiz/create', {
+    method: 'POST',
+    body: JSON.stringify(quizData),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to create quiz');
+  }
+
+  return response.json();
+};
+
+export const addQuestionToQuiz = async (quizId, questionData) => {
+  const response = await authFetch(`/quiz/${quizId}/questions`, {
+    method: 'POST',
+    body: JSON.stringify(questionData),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to add question to quiz');
+  }
+
+  return response.json();
+};
+
+export const updateQuiz = async (quizId, quizData) => {
+  const response = await authFetch(`/quiz/${quizId}`, {
+    method: 'PUT',
+    body: JSON.stringify(quizData),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to update quiz');
+  }
+
+  return response.json();
+};
+
+export const deleteQuestion = async (questionId) => {
+  const response = await authFetch(`/quiz/questions/${questionId}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to delete question');
+  }
+};
+
+export const deleteQuiz = async (quizId) => {
+  const response = await authFetch(`/quiz/${quizId}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to delete quiz');
+  }
+};

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { createModule, deleteModule, getModules, updateModule } from '../services/api';
 
@@ -38,6 +39,7 @@ function AdminModulePage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const formRef = useRef(null);
+  const navigate = useNavigate();
 
   const isEditing = Boolean(editingModuleId);
   const hasModules = useMemo(() => modules.length > 0, [modules]);
@@ -153,6 +155,9 @@ function AdminModulePage() {
             <p className="eyebrow">CampusReady Admin</p>
             <h1>Module Management</h1>
             <p>Create, view, and delete training modules for your campus readiness program.</p>
+            <button type="button" className="primary-button admin-nav-button" onClick={() => navigate('/admin/quizzes')}>
+              Manage Quizzes
+            </button>
           </div>
         </section>
 

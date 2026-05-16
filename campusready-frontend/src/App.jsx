@@ -5,6 +5,8 @@ import LoginPage from './pages/LoginPage';
 import ModulesPage from './pages/ModulesPage';
 import ProgressPage from './pages/ProgressPage';
 import AdminModulePage from './pages/AdminModulePage';
+import QuizPage from './pages/QuizPage';
+import AdminQuizPage from './pages/AdminQuizPage';
 
 function App() {
   return (
@@ -13,9 +15,12 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/modules" element={<ModulesPage />} />
+          <Route path="/modules/:moduleId" element={<ModulesPage />} />
+          <Route path="/quiz/:moduleId" element={<QuizPage />} />
           <Route path="/progress" element={<ProgressPage />} />
           <Route element={<AdminRoute />}>
             <Route path="/admin/modules" element={<AdminModulePage />} />
+            <Route path="/admin/quizzes" element={<AdminQuizPage />} />
           </Route>
         </Route>
       </Routes>
