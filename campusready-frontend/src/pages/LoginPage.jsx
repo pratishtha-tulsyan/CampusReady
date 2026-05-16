@@ -103,13 +103,6 @@ function LoginPage() {
                 required
               />
 
-              <div className="login-actions">
-                <label className="remember">
-                  <input type="checkbox" /> Remember me
-                </label>
-                <a className="forgot" href="#">Forgot?</a>
-              </div>
-
               <button className="primary-button" type="submit" disabled={isLoading}>
                 {isLoading ? 'Signing in...' : 'Login'}
               </button>

@@ -43,12 +43,20 @@ function Navbar() {
             Leaderboard
           </NavLink>
           {isAdmin() && (
-            <NavLink
-              className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
-              to="/admin/modules"
-            >
-              Admin
-            </NavLink>
+            <>
+              <NavLink
+                className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+                to="/admin/modules"
+              >
+                Admin Modules
+              </NavLink>
+              <NavLink
+                className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+                to="/admin/users"
+              >
+                Users
+              </NavLink>
+            </>
           )}
           <button
             className="nav-link nav-button theme-toggle-button"

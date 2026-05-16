@@ -111,6 +111,55 @@ export const deleteModule = async (moduleId) => {
   }
 };
 
+export const getAdminUsers = async () => {
+  const response = await authFetch('/admin/users');
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch users');
+  }
+
+  return response.json();
+};
+
+export const createUser = async (userData) => {
+  const response = await authFetch('/admin/users', {
+    method: 'POST',
+    body: JSON.stringify(userData),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(errorData?.message || 'Create user request failed');
+  }
+
+  return response.json();
+};
+
+export const deleteUser = async (userId) => {
+  const response = await authFetch(`/admin/users/${userId}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(errorData?.message || 'Delete user request failed');
+  }
+};
+
+export const updateUserRole = async (userId, role) => {
+  const response = await authFetch(`/admin/users/${userId}/role`, {
+    method: 'PUT',
+    body: JSON.stringify({ role }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(errorData?.message || 'Update user role request failed');
+  }
+
+  return response.json();
+};
+
 export const getUserProgress = async () => {
   const response = await authFetch('/progress/my');
 

@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import ModulesPage from './pages/ModulesPage';
 import ProgressPage from './pages/ProgressPage';
 import AdminModulePage from './pages/AdminModulePage';
+import AdminUsersPage from './pages/AdminUsersPage';
 import QuizPage from './pages/QuizPage';
 import AdminQuizPage from './pages/AdminQuizPage';
 import LeaderboardPage from './pages/LeaderboardPage';
@@ -29,6 +30,7 @@ function App() {
           <Route element={<AdminRoute />}>
             <Route path="/admin/modules" element={<AdminModulePage />} />
             <Route path="/admin/quizzes" element={<AdminQuizPage />} />
+            <Route path="/admin/users" element={<AdminUsersPage />} />
           </Route>
         </Route>
       </Routes>

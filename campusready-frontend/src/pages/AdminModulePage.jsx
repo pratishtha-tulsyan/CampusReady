@@ -155,9 +155,14 @@ function AdminModulePage() {
             <p className="eyebrow">CampusReady Admin</p>
             <h1>Module Management</h1>
             <p>Create, view, and delete training modules for your campus readiness program.</p>
-            <button type="button" className="primary-button admin-nav-button" onClick={() => navigate('/admin/quizzes')}>
-              Manage Quizzes
-            </button>
+            <div className="admin-header-buttons">
+              <button type="button" className="primary-button admin-nav-button" onClick={() => navigate('/admin/quizzes')}>
+                Manage Quizzes
+              </button>
+              <button type="button" className="secondary-button admin-nav-button" onClick={() => navigate('/admin/users')}>
+                Manage Users
+              </button>
+            </div>
           </div>
         </section>
 
