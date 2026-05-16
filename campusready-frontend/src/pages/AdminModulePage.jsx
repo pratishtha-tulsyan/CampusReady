@@ -2,6 +2,25 @@ import { useEffect, useMemo, useState } from 'react';
 import Navbar from '../components/Navbar';
 import { createModule, deleteModule, getModules } from '../services/api';
 
+const disasterOptions = [
+  { value: '', label: 'Select a disaster type' },
+  { value: 'EARTHQUAKE', label: 'EARTHQUAKE' },
+  { value: 'FLOOD', label: 'FLOOD' },
+  { value: 'FIRE', label: 'FIRE' },
+  { value: 'CYCLONE', label: 'CYCLONE' },
+  { value: 'LANDSLIDE', label: 'LANDSLIDE' },
+  { value: 'TSUNAMI', label: 'TSUNAMI' },
+];
+
+const disasterEmojiMap = {
+  EARTHQUAKE: '🌍',
+  FLOOD: '🌊',
+  FIRE: '🔥',
+  CYCLONE: '🌪️',
+  LANDSLIDE: '⛰️',
+  TSUNAMI: '🌊',
+};
+
 const initialFormState = {
   title: '',
   description: '',
@@ -19,6 +38,8 @@ function AdminModulePage() {
   const [success, setSuccess] = useState('');
 
   const hasModules = useMemo(() => modules.length > 0, [modules]);
+
+  const getDisasterEmoji = (type) => disasterEmojiMap[type] || '🛡️';
 
   useEffect(() => {
     const fetchModules = async () => {
@@ -90,71 +111,92 @@ function AdminModulePage() {
         </section>
 
         <section className="admin-panel">
-          <form className="admin-form" onSubmit={handleCreateModule}>
-            <h2>Create Module</h2>
+          <div className="admin-grid">
+            <form className="admin-form-card" onSubmit={handleCreateModule}>
+              <div className="admin-form-header">
+                <h2>Create Module</h2>
+                <p className="admin-form-copy">
+                  Add a new training module to keep campus teams ready and informed.
+                </p>
+              </div>
 
-            <label htmlFor="title">Title</label>
-            <input
-              id="title"
-              name="title"
-              type="text"
-              value={formState.title}
-              onChange={handleChange}
-              required
-            />
+              {error && <p className="dashboard-status error">{error}</p>}
+              {success && <p className="dashboard-status success">{success}</p>}
 
-            <label htmlFor="description">Description</label>
-            <textarea
-              id="description"
-              name="description"
-              value={formState.description}
-              onChange={handleChange}
-              required
-            />
+              <div className="admin-form-field">
+                <label htmlFor="title">Title</label>
+                <input
+                  id="title"
+                  name="title"
+                  type="text"
+                  value={formState.title}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-            <label htmlFor="disasterType">Disaster Type</label>
-            <input
-              id="disasterType"
-              name="disasterType"
-              type="text"
-              value={formState.disasterType}
-              onChange={handleChange}
-              required
-            />
+              <div className="admin-form-field">
+                <label htmlFor="description">Description</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formState.description}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-            <label htmlFor="content">Content</label>
-            <textarea
-              id="content"
-              name="content"
-              value={formState.content}
-              onChange={handleChange}
-              required
-            />
+              <div className="admin-form-field">
+                <label htmlFor="disasterType">Disaster Type</label>
+                <select
+                  id="disasterType"
+                  name="disasterType"
+                  value={formState.disasterType}
+                  onChange={handleChange}
+                  required
+                >
+                  {disasterOptions.map((option) => (
+                    <option key={option.value} value={option.value} disabled={option.value === ''}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-            <button type="submit" disabled={isSaving}>
-              {isSaving ? 'Saving module...' : 'Create Module'}
-            </button>
-          </form>
+              <div className="admin-form-field">
+                <label htmlFor="content">Content</label>
+                <textarea
+                  id="content"
+                  name="content"
+                  value={formState.content}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-          <section className="admin-modules-list">
-            <div className="admin-modules-header">
-              <h2>Existing Modules</h2>
-              {isLoading && <p>Loading modules...</p>}
-            </div>
+              <button className="primary-button" type="submit" disabled={isSaving}>
+                {isSaving ? 'Saving module...' : 'Create Module'}
+              </button>
+            </form>
 
-            {error && <p className="dashboard-status error">{error}</p>}
-            {success && <p className="dashboard-status success">{success}</p>}
+            <section className="admin-modules-card">
+              <div className="admin-modules-header">
+                <h2>Existing Modules</h2>
+                {isLoading && <p className="subtle-text">Loading modules...</p>}
+              </div>
 
-            {!isLoading && !hasModules && (
-              <p className="dashboard-status">No modules have been created yet.</p>
-            )}
+              {!isLoading && !hasModules && (
+                <p className="dashboard-status">No modules have been created yet.</p>
+              )}
 
-            {!isLoading && hasModules && (
-              <div className="modules-grid" aria-label="Admin module list">
+              <div className="modules-grid admin-modules-grid" aria-label="Admin module list">
                 {modules.map((module) => (
                   <article className="module-card admin-card" key={module.id}>
                     <div className="module-card-header">
-                      <h3>{module.title}</h3>
+                      <h3>
+                        <span className="module-emoji">{getDisasterEmoji(module.disasterType)}</span>
+                        {module.title}
+                      </h3>
                       <button
                         type="button"
                         className="delete-button"
@@ -171,8 +213,8 @@ function AdminModulePage() {
                   </article>
                 ))}
               </div>
-            )}
-          </section>
+            </section>
+          </div>
         </section>
       </main>
     </>
