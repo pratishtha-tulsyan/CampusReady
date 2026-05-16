@@ -702,7 +702,7 @@ input {
 }
 
 .module-card.admin-card {
-  min-height: 360px;
+  min-height: 260px;
   padding: 0;
   overflow: hidden;
   display: flex;
@@ -737,8 +737,8 @@ input {
 }
 
 .module-card.admin-card .card-content {
-  padding: 28px;
-  flex: 1;
+  padding: 24px;
+  
 }
 
 .module-card-actions {
@@ -748,7 +748,7 @@ input {
   padding: 20px 28px;
   border-top: 1px solid #e2e8f0;
   background: #ffffff;
-  margin-top: 12px;
+  margin-top: 5px;
 }
 
 .module-emoji {
