@@ -830,3 +830,93 @@ input {
     text-align: center;
   }
 }
+
+.leaderboard-container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.leaderboard-table {
+  background: #ffffff;
+  border: 1px solid #d8e2e8;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 14px 36px rgba(8, 47, 73, 0.08);
+}
+
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 140px 140px 120px;
+  gap: 16px;
+  padding: 18px 24px;
+  align-items: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.leaderboard-row:last-child {
+  border-bottom: none;
+}
+
+.leaderboard-head {
+  background: #082f49;
+}
+
+.leaderboard-head span {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.leaderboard-row span {
+  color: #102033;
+  font-weight: 600;
+}
+
+.leaderboard-rank {
+  font-weight: 700;
+  color: #0b3a5b;
+}
+
+.leaderboard-points {
+  font-weight: 700;
+  color: #0b3a5b;
+}
+
+@media (max-width: 768px) {
+  .leaderboard-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .leaderboard-head {
+    display: none;
+  }
+
+  .leaderboard-row span::before {
+    display: block;
+    margin-bottom: 4px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .leaderboard-row span:nth-child(1)::before {
+    content: "Rank";
+  }
+
+  .leaderboard-row span:nth-child(2)::before {
+    content: "User";
+  }
+
+  .leaderboard-row span:nth-child(3)::before {
+    content: "Modules";
+  }
+
+  .leaderboard-row span:nth-child(4)::before {
+    content: "Quizzes";
+  }
+
+  .leaderboard-row span:nth-child(5)::before {
+    content: "Points";
+  }
+}

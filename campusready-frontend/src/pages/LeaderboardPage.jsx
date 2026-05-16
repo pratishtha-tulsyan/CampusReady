@@ -41,8 +41,9 @@ function LeaderboardPage() {
         {error && <p className="dashboard-status error">{error}</p>}
 
         {!loading && !error && (
-          <section className="leaderboard-table" aria-label="Leaderboard rankings">
-            <div className="leaderboard-header">
+          <section className="leaderboard-container" aria-label="Leaderboard rankings">
+         <div className="leaderboard-table">
+            <div className="leaderboard-row leaderboard-head">
               <span>Rank</span>
               <span>User</span>
               <span>Modules</span>
@@ -53,15 +54,24 @@ function LeaderboardPage() {
               <p className="dashboard-status">No leaderboard data is available yet.</p>
             ) : (
               leaderboard.map((entry, index) => (
-                <article className="leaderboard-row" key={entry.userId}>
-                  <span>{index + 1}</span>
-                  <span>{entry.userName}</span>
-                  <span>{entry.completedModules}</span>
-                  <span>{entry.passedQuizzes}</span>
-                  <span>{entry.totalPoints}</span>
-                </article>
-              ))
+  <article className="leaderboard-row" key={entry.userId}>
+    <span className="leaderboard-rank">
+      #{index + 1}
+    </span>
+
+    <span>{entry.userName}</span>
+
+    <span>{entry.completedModules}</span>
+
+    <span>{entry.passedQuizzes}</span>
+
+    <span className="leaderboard-points">
+      {entry.totalPoints}
+    </span>
+  </article>
+))
             )}
+            </div>
           </section>
         )}
       </main>
