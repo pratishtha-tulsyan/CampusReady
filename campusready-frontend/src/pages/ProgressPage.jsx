@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import { getModules, getUserProgress } from '../services/api';
 
-const DEFAULT_USER_ID = 1;
 
 function ProgressPage() {
   const [progress, setProgress] = useState([]);
@@ -18,7 +17,7 @@ function ProgressPage() {
 
       try {
         const [progressData, modulesData] = await Promise.all([
-          getUserProgress(DEFAULT_USER_ID),
+          getUserProgress(),
           getModules(),
         ]);
         const titlesById = modulesData.reduce((titles, module) => ({

@@ -2,6 +2,7 @@ package com.campusready.campusready.controller;
 
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,12 +24,15 @@ public class ProgressController {
     }
 
     @PostMapping("/complete")
-    public Progress completeModule(@RequestBody Progress progress) {
-        return progressService.completeModule(progress);
-    }
+public Progress completeModule(
+        @RequestBody Progress progress,
+        Authentication authentication
+) {
+    return progressService.completeModule(progress, authentication);
+}
 
-    @GetMapping("/user/{userId}")
-    public List<Progress> getProgressByUser(@PathVariable Long userId) {
-        return progressService.getProgressByUser(userId);
-    }
+    @GetMapping("/my")
+public List<Progress> getMyProgress(Authentication authentication) {
+    return progressService.getMyProgress(authentication);
+}
 }

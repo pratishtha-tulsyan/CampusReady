@@ -71,11 +71,10 @@ export const createModule = async (moduleData) => {
   return response.json();
 };
 
-export const completeModule = async ({ userId, moduleId, completed, completedAt }) => {
+export const completeModule = async ({ moduleId, completed, completedAt }) => {
   const response = await authFetch('/progress/complete', {
     method: 'POST',
     body: JSON.stringify({
-      userId,
       moduleId,
       completed,
       completedAt,
@@ -112,8 +111,8 @@ export const deleteModule = async (moduleId) => {
   }
 };
 
-export const getUserProgress = async (userId) => {
-  const response = await fetch(`${API_BASE_URL}/progress/user/${userId}`);
+export const getUserProgress = async () => {
+  const response = await authFetch('/progress/my');
 
   if (!response.ok) {
     throw new Error('Progress request failed');

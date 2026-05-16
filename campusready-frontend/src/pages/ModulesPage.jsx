@@ -3,7 +3,6 @@ import ModuleCard from '../components/ModuleCard';
 import Navbar from '../components/Navbar';
 import { completeModule, getModules, getUserProgress } from '../services/api';
 
-const DEFAULT_USER_ID = 1;
 
 const disasterOptions = [
   { value: '', label: 'All Disaster Types' },
@@ -78,7 +77,7 @@ function ModulesPage() {
       try {
         const [moduleData, progressData] = await Promise.all([
           getModules(),
-          getUserProgress(DEFAULT_USER_ID),
+          getUserProgress(),
         ]);
 
         setModules(moduleData);
@@ -122,7 +121,6 @@ function ModulesPage() {
 
     try {
       const completed = await completeModule({
-        userId: DEFAULT_USER_ID,
         moduleId,
         completed: true,
         completedAt: new Date().toISOString().slice(0, 19),
