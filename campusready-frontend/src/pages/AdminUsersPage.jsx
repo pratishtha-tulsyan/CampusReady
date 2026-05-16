@@ -33,7 +33,7 @@ function AdminUsersPage() {
       try {
         const userList = await getAdminUsers();
         setUsers(userList);
-      } catch (err) {
+      } catch {
         setError('Unable to load users. Please try again.');
       } finally {
         setIsLoading(false);

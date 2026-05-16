@@ -38,6 +38,12 @@ function Navbar() {
           </NavLink>
           <NavLink
             className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+            to="/certificate"
+          >
+            Certificate
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
             to="/leaderboard"
           >
             Leaderboard

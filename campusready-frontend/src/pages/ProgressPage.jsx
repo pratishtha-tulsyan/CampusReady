@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { getModules, getUserProgress, getMyBadges } from '../services/api';
+import { getModules, getUserProgress, getMyBadges, getMyCertificate } from '../services/api';
 
 function ProgressPage() {
   const [progress, setProgress] = useState([]);
@@ -12,19 +13,26 @@ function ProgressPage() {
   const [totalPoints, setTotalPoints] = useState(0);
   const [passedQuizzes, setPassedQuizzes] = useState(0);
   const [badgeLoading, setBadgeLoading] = useState(false);
+  const [certificateEarned, setCertificateEarned] = useState(false);
+  const [loadingCertificate, setLoadingCertificate] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProgress = async () => {
       setProgressMessage('');
       setIsProgressLoading(true);
       setBadgeLoading(true);
+      setLoadingCertificate(true);
 
       try {
-        const [progressData, modulesData, badgeData] = await Promise.all([
+        const [progressData, modulesData, badgeData, certificateData] = await Promise.all([
           getUserProgress(),
           getModules(),
           getMyBadges(),
+          getMyCertificate(),
         ]);
+
         const titlesById = modulesData.reduce((titles, module) => ({
           ...titles,
           [module.id]: module.title,
@@ -36,11 +44,13 @@ function ProgressPage() {
         setBadges(badgeData.badges || []);
         setTotalPoints(badgeData.totalPoints || 0);
         setPassedQuizzes(badgeData.passedQuizzes || 0);
+        setCertificateEarned(Boolean(certificateData));
       } catch {
         setProgressMessage('Unable to load progress. Please try again later.');
       } finally {
         setIsProgressLoading(false);
         setBadgeLoading(false);
+        setLoadingCertificate(false);
       }
     };
 
@@ -75,6 +85,21 @@ function ProgressPage() {
             <h1>Progress</h1>
             <p>Track completed disaster readiness modules for your campus account.</p>
           </div>
+        </section>
+
+        <section className="certificate-summary" aria-label="Certificate status">
+          <article>
+            <span>Certificate Status</span>
+            <strong>{loadingCertificate ? 'Checking...' : certificateEarned ? 'Earned ✅' : 'Locked'}</strong>
+          </article>
+          <article>
+            <span>Certificate Page</span>
+            <strong>
+              <button type="button" className="secondary-button" onClick={() => navigate('/certificate')}>
+                View Certificate
+              </button>
+            </strong>
+          </article>
         </section>
 
         <section className="progress-summary" aria-label="Progress summary">

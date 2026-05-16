@@ -15,45 +15,33 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name = "certificates")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class Certificate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private Long userId;
 
     @Column(nullable = false, unique = true)
-    private String email;
+    private String certificateCode;
 
     @Column(nullable = false)
-    private String password;
+    private Integer completionPercentage;
 
     @Column(nullable = false)
-    private String role;
-
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    @Column(nullable = false)
-    private String status = "ACTIVE";
+    private LocalDateTime issuedAt;
 
     @PrePersist
     protected void onCreate() {
-        if (createdAt == null) {
-            createdAt = LocalDateTime.now();
-        }
-        if (status == null || status.isBlank()) {
-            status = "ACTIVE";
-        }
-        if (role == null || role.isBlank()) {
-            role = "STUDENT";
+        if (issuedAt == null) {
+            issuedAt = LocalDateTime.now();
         }
     }
 }

@@ -248,6 +248,55 @@ export const getMyBadges = async () => {
   return response.json();
 };
 
+export const getMyCertificate = async () => {
+  const response = await authFetch('/certificate/my');
+
+  if (response.status === 404) {
+    return null;
+  }
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch certificate');
+  }
+
+  return response.json();
+};
+
+export const generateCertificate = async () => {
+  const response = await authFetch('/certificate/generate', {
+    method: 'POST',
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(errorData?.message || 'Generate certificate request failed');
+  }
+
+  return response.json();
+};
+
+export const downloadCertificatePdf = async () => {
+  const response = await authFetch('/certificate/my/pdf');
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(errorData?.message || 'Failed to download certificate PDF');
+  }
+
+  return response.blob();
+};
+
+export const verifyCertificate = async (code) => {
+  const response = await authFetch(`/certificate/verify/${code}`);
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(errorData?.message || 'Failed to verify certificate');
+  }
+
+  return response.json();
+};
+
 // Admin quiz functions
 export const createQuiz = async (quizData) => {
   const response = await authFetch('/quiz/create', {

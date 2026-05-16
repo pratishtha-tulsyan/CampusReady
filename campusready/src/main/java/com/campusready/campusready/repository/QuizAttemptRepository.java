@@ -12,6 +12,7 @@ import com.campusready.campusready.entity.QuizAttempt;
 public interface QuizAttemptRepository extends JpaRepository<QuizAttempt, Long> {
     List<QuizAttempt> findByUserId(Long userId);
     List<QuizAttempt> findByUserIdAndQuizIdOrderByAttemptedAtDesc(Long userId, Long quizId);
-    
+    List<QuizAttempt> findByUserIdAndPassedTrue(Long userId);
+
     Optional<QuizAttempt> findFirstByUserIdAndQuizIdAndPassedTrue(Long userId, Long quizId);
 }

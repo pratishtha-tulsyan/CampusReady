@@ -7,6 +7,7 @@ import ModulesPage from './pages/ModulesPage';
 import ProgressPage from './pages/ProgressPage';
 import AdminModulePage from './pages/AdminModulePage';
 import AdminUsersPage from './pages/AdminUsersPage';
+import CertificatePage from './pages/CertificatePage';
 import QuizPage from './pages/QuizPage';
 import AdminQuizPage from './pages/AdminQuizPage';
 import LeaderboardPage from './pages/LeaderboardPage';
@@ -27,6 +28,7 @@ function App() {
           <Route path="/quiz/:moduleId" element={<QuizPage />} />
           <Route path="/progress" element={<ProgressPage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
+          <Route path="/certificate" element={<CertificatePage />} />
           <Route element={<AdminRoute />}>
             <Route path="/admin/modules" element={<AdminModulePage />} />
             <Route path="/admin/quizzes" element={<AdminQuizPage />} />

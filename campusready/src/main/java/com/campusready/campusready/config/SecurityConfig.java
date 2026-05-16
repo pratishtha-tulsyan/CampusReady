@@ -47,6 +47,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/modules/create").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/modules/*").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/progress/complete").authenticated()
+                .requestMatchers("/certificate/**").authenticated()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll()
             )
