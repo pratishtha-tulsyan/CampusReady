@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
@@ -8,8 +9,13 @@ import AdminModulePage from './pages/AdminModulePage';
 import QuizPage from './pages/QuizPage';
 import AdminQuizPage from './pages/AdminQuizPage';
 import LeaderboardPage from './pages/LeaderboardPage';
+import { applyTheme, getSavedTheme } from './services/theme';
 
 function App() {
+  useEffect(() => {
+    applyTheme(getSavedTheme());
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>

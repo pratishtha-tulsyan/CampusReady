@@ -1,8 +1,15 @@
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { clearAuthUser, isAdmin } from '../services/auth';
+import { applyTheme, getSavedTheme, saveTheme, themes } from '../services/theme';
 
 function Navbar() {
   const navigate = useNavigate();
+  const [theme, setTheme] = useState(getSavedTheme());
+
+  useEffect(() => {
+    applyTheme(theme);
+  }, [theme]);
 
   const handleLogout = () => {
     clearAuthUser();
@@ -43,6 +50,18 @@ function Navbar() {
               Admin
             </NavLink>
           )}
+          <button
+            className="nav-link nav-button theme-toggle-button"
+            type="button"
+            onClick={() => {
+              const nextTheme = theme === themes.dark ? themes.light : themes.dark;
+              setTheme(nextTheme);
+              saveTheme(nextTheme);
+            }}
+            aria-label={theme === themes.dark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === themes.dark ? '☀️ Light' : '🌙 Dark'}
+          </button>
           <button
             className="nav-link nav-button"
             type="button"
