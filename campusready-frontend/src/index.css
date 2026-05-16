@@ -690,19 +690,29 @@ input {
 
 .module-card.admin-card .module-card-header {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
   margin-bottom: 18px;
 }
 
 .module-card.admin-card h3 {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
   margin: 0;
+  flex: 1;
+  min-width: 0;
   font-size: 20px;
   line-height: 1.2;
+  word-break: break-word;
+}
+
+.module-card-actions {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 0.75rem;
+  flex-shrink: 0;
 }
 
 .module-emoji {
