@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
-import { getModules, getUserProgress } from '../services/api';
-
+import { getModules, getUserProgress, getMyBadges } from '../services/api';
 
 function ProgressPage() {
   const [progress, setProgress] = useState([]);
@@ -9,16 +8,22 @@ function ProgressPage() {
   const [totalModules, setTotalModules] = useState(0);
   const [progressMessage, setProgressMessage] = useState('');
   const [isProgressLoading, setIsProgressLoading] = useState(false);
+  const [badges, setBadges] = useState([]);
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [passedQuizzes, setPassedQuizzes] = useState(0);
+  const [badgeLoading, setBadgeLoading] = useState(false);
 
   useEffect(() => {
     const fetchProgress = async () => {
       setProgressMessage('');
       setIsProgressLoading(true);
+      setBadgeLoading(true);
 
       try {
-        const [progressData, modulesData] = await Promise.all([
+        const [progressData, modulesData, badgeData] = await Promise.all([
           getUserProgress(),
           getModules(),
+          getMyBadges(),
         ]);
         const titlesById = modulesData.reduce((titles, module) => ({
           ...titles,
@@ -28,10 +33,14 @@ function ProgressPage() {
         setProgress(progressData);
         setModuleTitles(titlesById);
         setTotalModules(modulesData.length);
+        setBadges(badgeData.badges || []);
+        setTotalPoints(badgeData.totalPoints || 0);
+        setPassedQuizzes(badgeData.passedQuizzes || 0);
       } catch {
         setProgressMessage('Unable to load progress. Please try again later.');
       } finally {
         setIsProgressLoading(false);
+        setBadgeLoading(false);
       }
     };
 
@@ -78,9 +87,34 @@ function ProgressPage() {
             <strong>{totalModules}</strong>
           </article>
           <article>
+            <span>Total Points</span>
+            <strong>{badgeLoading ? 'Loading...' : `${totalPoints} pts`}</strong>
+          </article>
+          <article>
+            <span>Quiz Passes</span>
+            <strong>{badgeLoading ? 'Loading...' : passedQuizzes}</strong>
+          </article>
+          <article>
             <span>Overall Progress</span>
             <strong>{progressPercentage}%</strong>
           </article>
+        </section>
+
+        <section className="badge-summary" aria-label="Achievement badges">
+          <h2>Your badges</h2>
+          <div className="badge-grid">
+            {badgeLoading ? (
+              <span>Loading badges...</span>
+            ) : badges.length === 0 ? (
+              <span className="badge-empty">Earn your first badge by completing a module.</span>
+            ) : (
+              badges.map((badge) => (
+                <span key={badge} className="badge-chip">
+                  {badge}
+                </span>
+              ))
+            )}
+          </div>
         </section>
 
         {isProgressLoading && <p className="dashboard-status">Loading progress...</p>}

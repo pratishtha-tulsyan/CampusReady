@@ -179,6 +179,26 @@ export const getQuizHistory = async (quizId) => {
   return response.json();
 };
 
+export const getLeaderboard = async () => {
+  const response = await authFetch('/leaderboard');
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch leaderboard');
+  }
+
+  return response.json();
+};
+
+export const getMyBadges = async () => {
+  const response = await authFetch('/leaderboard/my');
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch badges');
+  }
+
+  return response.json();
+};
+
 // Admin quiz functions
 export const createQuiz = async (quizData) => {
   const response = await authFetch('/quiz/create', {

@@ -29,6 +29,12 @@ function Navbar() {
           >
             Progress
           </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+            to="/leaderboard"
+          >
+            Leaderboard
+          </NavLink>
           {isAdmin() && (
             <NavLink
               className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
