@@ -706,7 +706,8 @@ input {
   min-width: 0;
   font-size: 20px;
   line-height: 1.2;
-  word-break: break-word;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .module-card-actions {
