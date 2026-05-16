@@ -207,9 +207,9 @@ function QuizPage() {
           <h1>{quiz.title}</h1>
           <p className="quiz-description">{quiz.description}</p>
           <div className="quiz-progress">
-            <div className="progress-bar">
+            <div className="quiz-progress-bar">
               <div
-                className="progress-fill"
+                className="quiz-progress-fill"
                 style={{
                   width: `${((currentQuestionIndex + 1) / questions.length) * 100}%`,
                 }}
