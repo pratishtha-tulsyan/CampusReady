@@ -266,7 +266,7 @@ input {
 .progress-bar {
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, #0b3a5b, #082f49);
+  background: #0b3a5b;
   transition: width 0.3s ease;
 }
 
