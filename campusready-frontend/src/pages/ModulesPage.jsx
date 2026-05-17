@@ -12,6 +12,8 @@ const disasterOptions = [
   { value: 'CYCLONE', label: 'CYCLONE' },
   { value: 'LANDSLIDE', label: 'LANDSLIDE' },
   { value: 'TSUNAMI', label: 'TSUNAMI' },
+  { value: 'DROUGHT', label: 'DROUGHT' },
+  { value: 'THUNDERSTORM', label: 'THUNDERSTORM' },
 ];
 
 const disasterEmojiMap = {
@@ -21,6 +23,8 @@ const disasterEmojiMap = {
   CYCLONE: '🌪️',
   LANDSLIDE: '⛰️',
   TSUNAMI: '🌊',
+  DROUGHT: '☀️',
+  THUNDERSTORM: '⛈️',
 };
 
 const statusOptions = [

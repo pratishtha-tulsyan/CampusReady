@@ -52,6 +52,8 @@ function LoginPage() {
     { emoji: '🌪️', title: 'Cyclone', desc: 'Prepare for high winds and shelter strategies.' },
     { emoji: '🌊', title: 'Tsunami', desc: 'Recognize warnings and safe evacuation routes.' },
     { emoji: '⛰️', title: 'Landslide', desc: 'Identify hazards and reduce exposure.' },
+    { emoji: '☀️', title: 'Drought', desc: 'Learn water conservation and drought preparedness strategies.' },
+    { emoji: '⛈️', title: 'Thunderstorm', desc: 'Understand lightning safety and severe weather precautions.' },
   ];
 
   return (
