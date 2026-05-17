@@ -6,7 +6,7 @@ import { createResource, deleteResource, getResources, updateResource } from '..
 const categoryOptions = [
   { value: '', label: 'Select a category' },
   { value: 'CONTACTS', label: 'Emergency Contacts' },
-  { value: 'GUIDES', label: 'Disaster Preparedness Guides' },
+  { value: 'URL', label: 'Disaster Preparedness Media' },
   { value: 'CHECKLISTS', label: 'Emergency Checklists' },
   { value: 'DOWNLOADS', label: 'Downloadable Resources' },
 ];
@@ -15,7 +15,7 @@ const resourceTypeOptions = [
   { value: '', label: 'Select a resource type' },
   { value: 'PHONE', label: 'Phone' },
   { value: 'PDF', label: 'PDF' },
-  { value: 'GUIDE', label: 'Guide' },
+  { value: 'URL', label: 'URL' },
   { value: 'CHECKLIST', label: 'Checklist' },
   { value: 'DOCUMENT', label: 'Document' },
 ];
@@ -304,7 +304,7 @@ function AdminResourcesPage() {
                       <p>{resource.description}</p>
                       <div className="module-card-meta">
                         <span>{resource.category}</span>
-                        <span>{resource.resourceType}</span>
+                        {/* <span>{resource.resourceType}</span> */}
                       </div>
                     </div>
 

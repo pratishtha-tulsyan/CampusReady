@@ -5,14 +5,14 @@ import { getResources } from '../services/api';
 const categoryOptions = [
   { value: '', label: 'All Categories' },
   { value: 'CONTACTS', label: 'Emergency Contacts' },
-  { value: 'GUIDES', label: 'Disaster Preparedness Guides' },
+  { value: 'URL', label: 'Disaster Preparedness Media' },
   { value: 'CHECKLISTS', label: 'Emergency Checklists' },
   { value: 'DOWNLOADS', label: 'Downloadable Resources' },
 ];
 
 const categoryEmoji = {
   CONTACTS: '🆘',
-  GUIDES: '📘',
+  URL: '🌐',
   CHECKLISTS: '✅',
   DOWNLOADS: '📎',
 };
@@ -21,7 +21,7 @@ const typeLabel = {
   PHONE: 'Phone',
   PDF: 'PDF',
   CHECKLIST: 'Checklist',
-  GUIDE: 'Guide',
+  URL: 'URL',
   DOCUMENT: 'Document',
 };
 
