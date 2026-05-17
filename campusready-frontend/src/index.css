@@ -194,13 +194,13 @@ svg {
 }
 
 .navbar-inner {
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 16px 24px;
+  padding: 14px 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  /* justify-content: space-between; */
+  gap: 20px;
   min-height: 72px;
   width: 100%;
 }
@@ -213,17 +213,23 @@ svg {
   color: var(--button-text);
   font-size: 1.15rem;
   letter-spacing: 0.04em;
-  font-weight: 800;
+  font-weight: 800; 
+  flex-shrink: 0;
+  white-space: nowrap
+
 }
 
 .navbar-links {
+  flex: 1;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  /* flex-wrap: nowrap; */
+  justify-content: center;
+  min-width: 0;
   flex-wrap: nowrap;
-  justify-content: flex-end;
-  overflow-x: auto;
-  padding-bottom: 2px;
+  /* overflow-x: auto;
+  padding-bottom: 2px; */
 }
 
 .navbar-links::-webkit-scrollbar {
@@ -240,12 +246,14 @@ svg {
 }
 
 .nav-link {
-  padding: 10px 14px;
+  padding: 10px 12px;
   border-radius: 999px;
   background: transparent;
   color: var(--text-alt);
   font-weight: 700;
   transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  white-space: nowrap;
+  font-size: 0.95rem;
 }
 
 .nav-link:hover {
@@ -262,6 +270,7 @@ svg {
 .nav-button {
   padding: 10px 14px;
   border-radius: 999px;
+  flex-shrink: 0;
 }
 
 .theme-toggle-button {

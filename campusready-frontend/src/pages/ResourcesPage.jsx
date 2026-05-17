@@ -4,17 +4,17 @@ import { getResources } from '../services/api';
 
 const categoryOptions = [
   { value: '', label: 'All Categories' },
-  { value: 'CONTACTS', label: 'Emergency Contacts' },
+  { value: 'CONTACT', label: 'Emergency Contacts' },
   { value: 'URL', label: 'Disaster Preparedness Media' },
-  { value: 'CHECKLISTS', label: 'Emergency Checklists' },
-  { value: 'DOWNLOADS', label: 'Downloadable Resources' },
+  { value: 'CHECKLIST', label: 'Emergency Checklists' },
+  { value: 'DOWNLOAD', label: 'Downloadable Resources' },
 ];
 
 const categoryEmoji = {
-  CONTACTS: '🆘',
+  CONTACT: '🆘',
   URL: '🌐',
-  CHECKLISTS: '✅',
-  DOWNLOADS: '📎',
+  CHECKLIST: '✅',
+  DOWNLOAD: '📎',
 };
 
 const typeLabel = {

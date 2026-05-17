@@ -5,10 +5,10 @@ import { createResource, deleteResource, getResources, updateResource } from '..
 
 const categoryOptions = [
   { value: '', label: 'Select a category' },
-  { value: 'CONTACTS', label: 'Emergency Contacts' },
+  { value: 'CONTACT', label: 'Emergency Contacts' },
   { value: 'URL', label: 'Disaster Preparedness Media' },
-  { value: 'CHECKLISTS', label: 'Emergency Checklists' },
-  { value: 'DOWNLOADS', label: 'Downloadable Resources' },
+  { value: 'CHECKLIST', label: 'Emergency Checklists' },
+  { value: 'DOWNLOAD', label: 'Downloadable Resources' },
 ];
 
 const resourceTypeOptions = [
