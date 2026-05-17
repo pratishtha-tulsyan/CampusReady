@@ -39,11 +39,18 @@ public class LeaderboardService {
     }
 
     public List<LeaderboardEntryDTO> getLeaderboard() {
+        // List<User> users = userRepository.findAll();
+        // return users.stream()
+        //         .map(this::buildLeaderboardEntry)
+        //         .sorted(Comparator.comparingInt(LeaderboardEntryDTO::getTotalPoints).reversed())
+        //         .collect(Collectors.toList());
         List<User> users = userRepository.findAll();
-        return users.stream()
-                .map(this::buildLeaderboardEntry)
-                .sorted(Comparator.comparingInt(LeaderboardEntryDTO::getTotalPoints).reversed())
-                .collect(Collectors.toList());
+
+return users.stream()
+        .filter(user -> !"ADMIN".equalsIgnoreCase(user.getRole()))
+        .map(this::buildLeaderboardEntry)
+        .sorted(Comparator.comparingInt(LeaderboardEntryDTO::getTotalPoints).reversed())
+        .collect(Collectors.toList());
     }
 
     public BadgeResponseDTO getBadgesForUser(Long userId) {

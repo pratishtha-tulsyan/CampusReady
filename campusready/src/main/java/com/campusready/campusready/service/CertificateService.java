@@ -160,82 +160,219 @@ public class CertificateService {
         return code;
     }
 
+    // private byte[] createCertificatePdf(Certificate certificate, User user) {
+    //     try (PDDocument document = new PDDocument()) {
+    //         PDPage page = new PDPage(PDRectangle.LETTER);
+    //         document.addPage(page);
+
+    //         try (PDPageContentStream content = new PDPageContentStream(document, page)) {
+    //             float pageWidth = page.getMediaBox().getWidth();
+    //             float pageHeight = page.getMediaBox().getHeight();
+
+    //             content.setNonStrokingColor(new Color(10, 41, 71));
+    //             content.addRect(0, pageHeight - 140, pageWidth, 140);
+    //             content.fill();
+
+    //             content.setNonStrokingColor(Color.WHITE);
+    //             content.beginText();
+    //             content.setFont(PDType1Font.HELVETICA_BOLD, 30);
+    //             content.newLineAtOffset(60, pageHeight - 80);
+    //             content.showText("CampusReady Certificate");
+    //             content.endText();
+
+    //             content.beginText();
+    //             content.setFont(PDType1Font.HELVETICA, 12);
+    //             content.newLineAtOffset(60, pageHeight - 100);
+    //             content.showText("Awarded to:");
+    //             content.endText();
+
+    //             content.beginText();
+    //             content.setFont(PDType1Font.HELVETICA_BOLD, 22);
+    //             content.newLineAtOffset(60, pageHeight - 130);
+    //             content.showText(user.getName());
+    //             content.endText();
+
+    //             content.beginText();
+    //             content.setFont(PDType1Font.HELVETICA, 12);
+    //             content.newLineAtOffset(60, pageHeight - 180);
+    //             content.showText("For successfully completing the CampusReady preparedness training program.");
+    //             content.endText();
+
+    //             content.beginText();
+    //             content.setFont(PDType1Font.HELVETICA, 12);
+    //             content.newLineAtOffset(60, pageHeight - 210);
+    //             content.showText("Issued on: " + certificate.getIssuedAt().toLocalDate().toString());
+    //             content.endText();
+
+    //             content.beginText();
+    //             content.setFont(PDType1Font.HELVETICA, 12);
+    //             content.newLineAtOffset(60, pageHeight - 230);
+    //             content.showText("Completion: " + certificate.getCompletionPercentage() + "%");
+    //             content.endText();
+
+    //             content.beginText();
+    //             content.setFont(PDType1Font.HELVETICA_BOLD, 12);
+    //             content.newLineAtOffset(60, pageHeight - 260);
+    //             content.showText("Certificate ID: " + certificate.getCertificateCode());
+    //             content.endText();
+
+    //             content.setNonStrokingColor(new Color(10, 41, 71));
+    //             content.addRect(60, 90, 220, 3);
+    //             content.fill();
+
+    //             content.beginText();
+    //             content.setNonStrokingColor(Color.DARK_GRAY);
+    //             content.setFont(PDType1Font.HELVETICA_OBLIQUE, 11);
+    //             content.newLineAtOffset(60, 70);
+    //             content.showText("CampusReady — Disaster Preparedness Certified");
+    //             content.endText();
+    //         }
+
+    //         try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+    //             document.save(output);
+    //             return output.toByteArray();
+    //         }
+    //     } catch (IOException e) {
+    //         throw new RuntimeException("Unable to create certificate PDF", e);
+    //     }
+    // }
+
     private byte[] createCertificatePdf(Certificate certificate, User user) {
-        try (PDDocument document = new PDDocument()) {
-            PDPage page = new PDPage(PDRectangle.LETTER);
-            document.addPage(page);
+    try (PDDocument document = new PDDocument()) {
 
-            try (PDPageContentStream content = new PDPageContentStream(document, page)) {
-                float pageWidth = page.getMediaBox().getWidth();
-                float pageHeight = page.getMediaBox().getHeight();
+        PDPage page = new PDPage(PDRectangle.LETTER);
+        document.addPage(page);
 
-                content.setNonStrokingColor(new Color(10, 41, 71));
-                content.addRect(0, pageHeight - 140, pageWidth, 140);
-                content.fill();
+        try (PDPageContentStream content = new PDPageContentStream(document, page)) {
 
-                content.setNonStrokingColor(Color.WHITE);
-                content.beginText();
-                content.setFont(PDType1Font.HELVETICA_BOLD, 30);
-                content.newLineAtOffset(60, pageHeight - 80);
-                content.showText("CampusReady Certificate");
-                content.endText();
+            float pageWidth = page.getMediaBox().getWidth();
+            float pageHeight = page.getMediaBox().getHeight();
 
-                content.beginText();
-                content.setFont(PDType1Font.HELVETICA, 12);
-                content.newLineAtOffset(60, pageHeight - 100);
-                content.showText("Awarded to:");
-                content.endText();
+            // Background
+            content.setNonStrokingColor(new Color(248, 250, 252));
+            content.addRect(0, 0, pageWidth, pageHeight);
+            content.fill();
 
-                content.beginText();
-                content.setFont(PDType1Font.HELVETICA_BOLD, 22);
-                content.newLineAtOffset(60, pageHeight - 130);
-                content.showText(user.getName());
-                content.endText();
+            // Outer border
+            content.setStrokingColor(new Color(11, 58, 91));
+            content.setLineWidth(4);
+            content.addRect(30, 30, pageWidth - 60, pageHeight - 60);
+            content.stroke();
 
-                content.beginText();
-                content.setFont(PDType1Font.HELVETICA, 12);
-                content.newLineAtOffset(60, pageHeight - 180);
-                content.showText("For successfully completing the CampusReady preparedness training program.");
-                content.endText();
+            // Inner border
+            content.setLineWidth(1.5f);
+            content.addRect(45, 45, pageWidth - 90, pageHeight - 90);
+            content.stroke();
 
-                content.beginText();
-                content.setFont(PDType1Font.HELVETICA, 12);
-                content.newLineAtOffset(60, pageHeight - 210);
-                content.showText("Issued on: " + certificate.getIssuedAt().toLocalDate().toString());
-                content.endText();
+            // Top banner
+            content.setNonStrokingColor(new Color(11, 39, 66));
+            content.addRect(0, pageHeight - 140, pageWidth, 140);
+            content.fill();
 
-                content.beginText();
-                content.setFont(PDType1Font.HELVETICA, 12);
-                content.newLineAtOffset(60, pageHeight - 230);
-                content.showText("Completion: " + certificate.getCompletionPercentage() + "%");
-                content.endText();
+            // Main title
+            content.beginText();
+            content.setNonStrokingColor(Color.WHITE);
+            content.setFont(PDType1Font.HELVETICA_BOLD, 34);
+            content.newLineAtOffset(145, pageHeight - 85);
+            content.showText("CERTIFICATE OF COMPLETION");
+            content.endText();
 
-                content.beginText();
-                content.setFont(PDType1Font.HELVETICA_BOLD, 12);
-                content.newLineAtOffset(60, pageHeight - 260);
-                content.showText("Certificate ID: " + certificate.getCertificateCode());
-                content.endText();
+            // Subtitle
+            content.beginText();
+            content.setFont(PDType1Font.HELVETICA, 16);
+            content.newLineAtOffset(235, pageHeight - 115);
+            content.showText("CampusReady");
+            content.endText();
 
-                content.setNonStrokingColor(new Color(10, 41, 71));
-                content.addRect(60, 90, 220, 3);
-                content.fill();
+            // Awarded text
+            content.beginText();
+            content.setNonStrokingColor(new Color(75, 100, 119));
+            content.setFont(PDType1Font.HELVETICA, 18);
+            content.newLineAtOffset(240, 560);
+            content.showText("This certificate is awarded to");
+            content.endText();
 
-                content.beginText();
-                content.setNonStrokingColor(Color.DARK_GRAY);
-                content.setFont(PDType1Font.HELVETICA_OBLIQUE, 11);
-                content.newLineAtOffset(60, 70);
-                content.showText("CampusReady — Disaster Preparedness Certified");
-                content.endText();
-            }
+            // User name
+            content.beginText();
+            content.setNonStrokingColor(new Color(11, 58, 91));
+            content.setFont(PDType1Font.HELVETICA_BOLD, 30);
+            content.newLineAtOffset(210, 510);
+            content.showText(user.getName());
+            content.endText();
 
-            try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
-                document.save(output);
-                return output.toByteArray();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Unable to create certificate PDF", e);
+            // Decorative line
+            content.setStrokingColor(new Color(11, 58, 91));
+            content.setLineWidth(2);
+            content.moveTo(180, 495);
+            content.lineTo(430, 495);
+            content.stroke();
+
+            // Description
+            content.beginText();
+            content.setNonStrokingColor(new Color(40, 55, 71));
+            content.setFont(PDType1Font.HELVETICA, 16);
+            content.newLineAtOffset(120, 445);
+            content.showText("For successfully completing the CampusReady");
+            content.endText();
+
+            content.beginText();
+            content.newLineAtOffset(155, 420);
+            content.showText("Disaster Preparedness Training Program.");
+            content.endText();
+
+            // Completion percentage
+            content.beginText();
+            content.setFont(PDType1Font.HELVETICA_BOLD, 18);
+            content.setNonStrokingColor(new Color(11, 58, 91));
+            content.newLineAtOffset(235, 365);
+            content.showText("Completion: " + certificate.getCompletionPercentage() + "%");
+            content.endText();
+
+            // Date section
+            content.beginText();
+            content.setFont(PDType1Font.HELVETICA, 14);
+            content.setNonStrokingColor(Color.DARK_GRAY);
+            content.newLineAtOffset(90, 180);
+            content.showText("Issued on: " + certificate.getIssuedAt().toLocalDate());
+            content.endText();
+
+            // Certificate ID
+            content.beginText();
+            content.setFont(PDType1Font.HELVETICA_BOLD, 14);
+            content.newLineAtOffset(90, 155);
+            content.showText("Certificate ID: " + certificate.getCertificateCode());
+            content.endText();
+
+            // Signature line
+            content.setLineWidth(1.5f);
+            content.moveTo(380, 180);
+            content.lineTo(520, 180);
+            content.stroke();
+
+            content.beginText();
+            content.setFont(PDType1Font.HELVETICA_OBLIQUE, 12);
+            content.newLineAtOffset(400, 160);
+            content.showText("Authorized Signature");
+            content.endText();
+
+            // Footer
+            content.beginText();
+            content.setNonStrokingColor(new Color(90, 105, 120));
+            content.setFont(PDType1Font.HELVETICA_OBLIQUE, 11);
+            content.newLineAtOffset(180, 80);
+            content.showText("CampusReady — Disaster Preparedness Certified");
+            content.endText();
         }
+
+        try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+            document.save(output);
+            return output.toByteArray();
+        }
+
+    } catch (IOException e) {
+        throw new RuntimeException("Unable to create certificate PDF", e);
     }
+}
 
     private CertificateResponseDTO toResponseDto(Certificate certificate, User user) {
         return new CertificateResponseDTO(
