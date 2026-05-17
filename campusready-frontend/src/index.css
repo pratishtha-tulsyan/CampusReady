@@ -1375,7 +1375,7 @@ svg {
 .login-actions .remember { display:inline-flex; gap:8px; align-items:center; color:var(--text-muted); }
 .login-actions .forgot { color:var(--primary); text-decoration:none; font-weight:700; }
 
-.disasters-section { padding:48px 24px; background: transparent; }
+.disasters-section { padding:48px 24px; background: #608da2; }
 .section-inner { max-width:1120px; margin:0 auto; }
 .section-inner h2 { margin:0 0 8px; color:var(--primary); }
 .section-sub { margin:0 0 20px; color:var(--text-muted); }

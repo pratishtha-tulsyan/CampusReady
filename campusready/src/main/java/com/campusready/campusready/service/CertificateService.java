@@ -240,7 +240,7 @@ public class CertificateService {
     private byte[] createCertificatePdf(Certificate certificate, User user) {
     try (PDDocument document = new PDDocument()) {
 
-        PDPage page = new PDPage(PDRectangle.LETTER);
+        PDPage page = new PDPage(PDRectangle.LETTER.rotate());
         document.addPage(page);
 
         try (PDPageContentStream content = new PDPageContentStream(document, page)) {
@@ -273,14 +273,14 @@ public class CertificateService {
             content.beginText();
             content.setNonStrokingColor(Color.WHITE);
             content.setFont(PDType1Font.HELVETICA_BOLD, 34);
-            content.newLineAtOffset(145, pageHeight - 85);
+            content.newLineAtOffset(250, pageHeight - 85);
             content.showText("CERTIFICATE OF COMPLETION");
             content.endText();
 
             // Subtitle
             content.beginText();
             content.setFont(PDType1Font.HELVETICA, 16);
-            content.newLineAtOffset(235, pageHeight - 115);
+            content.newLineAtOffset(355, pageHeight - 115);
             content.showText("CampusReady");
             content.endText();
 
@@ -288,35 +288,35 @@ public class CertificateService {
             content.beginText();
             content.setNonStrokingColor(new Color(75, 100, 119));
             content.setFont(PDType1Font.HELVETICA, 18);
-            content.newLineAtOffset(240, 560);
+            content.newLineAtOffset(350, 420);
             content.showText("This certificate is awarded to");
             content.endText();
 
             // User name
             content.beginText();
             content.setNonStrokingColor(new Color(11, 58, 91));
-            content.setFont(PDType1Font.HELVETICA_BOLD, 30);
-            content.newLineAtOffset(210, 510);
+            content.setFont(PDType1Font.HELVETICA_BOLD, 38);
+            content.newLineAtOffset(300, 360);
             content.showText(user.getName());
             content.endText();
 
             // Decorative line
             content.setStrokingColor(new Color(11, 58, 91));
             content.setLineWidth(2);
-            content.moveTo(180, 495);
-            content.lineTo(430, 495);
+            content.moveTo(250, 345);
+            content.lineTo(550, 345);
             content.stroke();
 
             // Description
             content.beginText();
             content.setNonStrokingColor(new Color(40, 55, 71));
             content.setFont(PDType1Font.HELVETICA, 16);
-            content.newLineAtOffset(120, 445);
+            content.newLineAtOffset(220, 290);
             content.showText("For successfully completing the CampusReady");
             content.endText();
 
             content.beginText();
-            content.newLineAtOffset(155, 420);
+            content.newLineAtOffset(255, 265);
             content.showText("Disaster Preparedness Training Program.");
             content.endText();
 
@@ -324,7 +324,7 @@ public class CertificateService {
             content.beginText();
             content.setFont(PDType1Font.HELVETICA_BOLD, 18);
             content.setNonStrokingColor(new Color(11, 58, 91));
-            content.newLineAtOffset(235, 365);
+            content.newLineAtOffset(345, 215);
             content.showText("Completion: " + certificate.getCompletionPercentage() + "%");
             content.endText();
 
@@ -332,26 +332,26 @@ public class CertificateService {
             content.beginText();
             content.setFont(PDType1Font.HELVETICA, 14);
             content.setNonStrokingColor(Color.DARK_GRAY);
-            content.newLineAtOffset(90, 180);
+            content.newLineAtOffset(90, 90);
             content.showText("Issued on: " + certificate.getIssuedAt().toLocalDate());
             content.endText();
 
             // Certificate ID
             content.beginText();
             content.setFont(PDType1Font.HELVETICA_BOLD, 14);
-            content.newLineAtOffset(90, 155);
+            content.newLineAtOffset(90, 65);
             content.showText("Certificate ID: " + certificate.getCertificateCode());
             content.endText();
 
             // Signature line
             content.setLineWidth(1.5f);
-            content.moveTo(380, 180);
-            content.lineTo(520, 180);
+            content.moveTo(560, 100);
+            content.lineTo(720, 100);
             content.stroke();
 
             content.beginText();
             content.setFont(PDType1Font.HELVETICA_OBLIQUE, 12);
-            content.newLineAtOffset(400, 160);
+            content.newLineAtOffset(485, 80);
             content.showText("Authorized Signature");
             content.endText();
 
@@ -359,7 +359,7 @@ public class CertificateService {
             content.beginText();
             content.setNonStrokingColor(new Color(90, 105, 120));
             content.setFont(PDType1Font.HELVETICA_OBLIQUE, 11);
-            content.newLineAtOffset(180, 80);
+            content.newLineAtOffset(260, 40);
             content.showText("CampusReady — Disaster Preparedness Certified");
             content.endText();
         }
