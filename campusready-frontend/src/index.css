@@ -1015,9 +1015,10 @@ svg {
   letter-spacing: 0.01em;
   cursor: pointer;
   transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
 }
 
 .primary-button:hover:not(:disabled) {
